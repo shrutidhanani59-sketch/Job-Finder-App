@@ -7,32 +7,40 @@ import Jobscreen from "./component/Jobscreen";
 import Login from "./component/Login";
 import Register from "./component/Register";
 import Savejob from "./component/Savejob";
+import Nave from "./component/Nave";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route , useLocation } from "react-router-dom";
 
 function App() {
+
+  const location = useLocation();
   return (
-    <Routes>
+    <>
+      {location.pathname !== "/" &&
+        location.pathname !== "/register" && <Nave />}
 
-      <Route path="/" element={<Login />} />
+      <Routes>
 
-      <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Login />} />
 
-      <Route path="/home" element={<Home />} />
+        <Route path="/register" element={<Register />} />
 
-      <Route path="/jobs" element={<Jobscreen />} />
+        <Route path="/home" element={<Home />} />
 
-      <Route path="/jobdetails" element={<Jobdetails />} />
+        <Route path="/jobs" element={<Jobscreen />} />
 
-      <Route path="/applyjob" element={<Applyjob />} />
+        <Route path="/jobdetails" element={<Jobdetails />} />
 
-      <Route path="/savejob" element={<Savejob />} />
+        <Route path="/applyjob" element={<Applyjob />} />
 
-      <Route path="/applications" element={<Applications />} />
+        <Route path="/savejob" element={<Savejob />} />
 
-      <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/applications" element={<Applications />} />
 
-    </Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+
+      </Routes>
+    </>
   );
 }
 

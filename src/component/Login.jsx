@@ -8,24 +8,28 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const email2 = "shrutidhanani@gmail.com";
-  const password2 = "1234567";
-
   const handlelogin = () => {
-    if (email === email2) {
-      if (password === password2) {
+    const userData = JSON.parse(localStorage.getItem("data"));
+
+    if (!userData) {
+      alert("Please Ragister First");
+      return;
+    }
+
+    if (email === userData.email) {
+
+      if (password === userData.password) {
         navigate("/Home");
-      }
-      else {
+      } else {
         alert("Password is Wrong");
       }
     } else {
       alert("Email is wrong");
-    };
+    }
 
   }
 
-  const handelragister = ()=>{
+  const handelragister = () => {
     navigate("/Register");
   }
   return (

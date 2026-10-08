@@ -5,18 +5,32 @@ import { useNavigate } from 'react-router-dom';
 
 function Register() {
 
-    const [name , setName] = useState("");
-    const [email , setEmail] = useState("");
-    const [password , setPassword] = useState("");
-    const [pNumber , setpNumber] = useState(0);
-    const [gender , setGender] = useState("");
-    const [skill , setSkill] = useState("");
-       const navigate = useNavigate();
-    const Ragister = ()=>{
-        navigate("/Home");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [pNumber, setpNumber] = useState(0);
+    const [gender, setGender] = useState("");
+    const [skill, setSkill] = useState("");
+
+
+    const navigate = useNavigate();
+    const Ragister = () => {
+        const userData = {
+            name: name,
+            email: email,
+            password: password,
+            pNumber: pNumber,
+            gender: gender,
+            skill: skill
+        };
+        localStorage.setItem("data", JSON.stringify(userData));
+        const AllData = JSON.parse(localStorage.getItem("data"));
+        console.log(AllData);
+        
+        navigate("/");
     }
 
-    const login = ()=>{
+    const login = () => {
         navigate("/");
     }
 
@@ -42,30 +56,30 @@ function Register() {
                     <p className="text-xl ml-[100px] mt-[5px]">Join us and find your dream job</p>
 
                     <div className="details ml-[100px] mt-[15px]">
-                        <label className="text-xl">Full Name</label><br/>
-                        <input className="border rounded-md py-1 px-2 w-[500px]" type="text" placeholder="Enter your Name" 
-                        onChange={(e)=>{setName(e.target.value)}} /><br/><br/>
+                        <label className="text-xl">Full Name</label><br />
+                        <input className="border rounded-md py-1 px-2 w-[500px]" type="text" placeholder="Enter your Name"
+                            onChange={(e) => { setName(e.target.value) }} /><br /><br />
 
-                        <label className="text-xl">Email Address</label><br/>
+                        <label className="text-xl">Email Address</label><br />
                         <input className="border rounded-md py-1 px-2 w-[500px]" type="email" placeholder="Enter your Email"
-                        onChange={(e)=>{setEmail(e.target.value)}} /><br/><br/>
+                            onChange={(e) => { setEmail(e.target.value) }} /><br /><br />
 
-                        <label className="text-xl">Password</label><br/>
-                        <input className="border rounded-md py-1 px-2 w-[500px]" type="password" placeholder="Enter Password" 
-                        onChange={(e)=>{setPassword(e.target.value)}}/><br/><br/>
+                        <label className="text-xl">Password</label><br />
+                        <input className="border rounded-md py-1 px-2 w-[500px]" type="password" placeholder="Enter Password"
+                            onChange={(e) => { setPassword(e.target.value) }} /><br /><br />
 
-                        <label className="text-xl">Phone Number</label><br/>
-                        <input className="border rounded-md py-1 px-2 w-[500px]" type="number" placeholder="Enter Phone Number" 
-                        onChange={(e)=>{setpNumber(e.target.value)}}/><br/><br/>
-                        
+                        <label className="text-xl">Phone Number</label><br />
+                        <input className="border rounded-md py-1 px-2 w-[500px]" type="number" placeholder="Enter Phone Number"
+                            onChange={(e) => { setpNumber(e.target.value) }} /><br /><br />
 
-                        <label className="text-xl">Gender</label><br/>
-                        <input type="radio" name="gender" value="male" onChange={(e)=>{setGender(e.target.value)}} />
+
+                        <label className="text-xl">Gender</label><br />
+                        <input type="radio" name="gender" value="male" onChange={(e) => { setGender(e.target.value) }} />
                         <label className="text-xl">Male</label>
-                        <input className="ml-5"  type="radio" name="gender" value="female" onChange={(e)=>{setGender(e.target.value)}} />
+                        <input className="ml-5" type="radio" name="gender" value="female" onChange={(e) => { setGender(e.target.value) }} />
                         <label className="text-xl">Female</label>
-                        <input className="ml-5" type="radio" name="gender" value="other" onChange={(e)=>{setGender(e.target.value)}} />
-                        <label className="text-xl">Other</label><br/><br/>
+                        <input className="ml-5" type="radio" name="gender" value="other" onChange={(e) => { setGender(e.target.value) }} />
+                        <label className="text-xl">Other</label><br /><br />
 
                         <label className="text-xl">City</label>
                         <select className="border rounded-md py-1 px-2 w-[100px] ml-[20px]">
@@ -74,11 +88,11 @@ function Register() {
                             <option>Surat</option>
                             <option>Vadodara</option>
                             <option>Gandhinagar</option>
-                        </select><br/><br/>
+                        </select><br /><br />
 
-                        <label className="text-xl">Skill</label><br/>
-                        <input className="border rounded-md py-1 px-2 w-[500px]" type="text" placeholder="e.g. React , Javascript , HTML" 
-                         onChange={(e)=>{setSkill(e.target.value)}}/>
+                        <label className="text-xl">Skill</label><br />
+                        <input className="border rounded-md py-1 px-2 w-[500px]" type="text" placeholder="e.g. React , Javascript , HTML"
+                            onChange={(e) => { setSkill(e.target.value) }} />
 
                         <button className=' mt-10 border w-[500px] p-2 rounded-lg px-5 bg-blue-700 text-white font-bold' onClick={Ragister} >Register</button>
                         <p className="ml-[130px] mt-3">Already have an account ? <span className="text-blue-700 font-bold hover:cursor-pointer" onClick={login}>Login</span></p>
@@ -88,8 +102,8 @@ function Register() {
 
                 <div className="textPart ">
                     <img className='ml-[150px]' src={ragister} alt="" />
-                    <h1 className='text-4xl text-center ml-[150px] font-bold '>Build Your Career <br/> With Us</h1>
-                    <p className='text-xl mt-5 text-center ml-[150px]  '>Get access to the best job opportunities <br/> and grow your carrer with JobFinder</p>
+                    <h1 className='text-4xl text-center ml-[150px] font-bold '>Build Your Career <br /> With Us</h1>
+                    <p className='text-xl mt-5 text-center ml-[150px]  '>Get access to the best job opportunities <br /> and grow your carrer with JobFinder</p>
                 </div>
             </div>
         </div>
