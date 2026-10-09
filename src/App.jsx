@@ -7,17 +7,16 @@ import Jobscreen from "./component/Jobscreen";
 import Login from "./component/Login";
 import Register from "./component/Register";
 import Savejob from "./component/Savejob";
-import Nave from "./component/Nave";
 
-import { Routes, Route , useLocation } from "react-router-dom";
+
+import { Routes, Route } from "react-router-dom";
 
 function App() {
 
-  const location = useLocation();
+
   return (
     <>
-      {location.pathname !== "/" &&
-        location.pathname !== "/register" && <Nave />}
+
 
       <Routes>
 

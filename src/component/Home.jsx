@@ -1,10 +1,32 @@
+import { Link } from "react-router-dom";
+
 function Home() {
   return (
     <div className="wrapper">
+      <nav className="flex  justify-between px-[50px] py-5 shadow-md">
+        <div className="leftPart flex">
+          <h1 className="text-3xl font-bold  text-blue-900 ">Job <span className="text-blue-400"> Finder</span></h1>
+
+          <ul className="flex mt-2 ml-20 gap-10 text-xl">
+            <li> <Link to="/home">Home </Link></li>
+            <li> <Link to="/Jobs"> Jobs </Link></li>
+            <li><Link to="/savejob">Saved Jobs </Link></li>
+            <li> <Link to="/applications">Applications </Link></li>
+          </ul>
+        </div>
+        <div className="icons flex gap-7 ">
+          <i className="fa-solid fa-magnifying-glass text-2xl mt-2"></i>
+          <div className="user flex gap-2">
+            <img className="h-10" src="https://cdn-icons-png.magnific.com/256/6997/6997662.png?semt=ais_white_label" alt="" />
+            <p className="mt-2 text-xl">Shruti<i className="fa-solid fa-angle-down"></i></p>
+          </div>
+        </div>
+      </nav>
+
       <div className="w-full h-[500px]  bg-[url('https://png.pngtree.com/thumb_back/fw800/background/20260103/pngtree-businesswoman-working-on-laptop-in-modern-office-space-image_21013028.webp')]  bg-cover bg-center" >
         <div className="text bg-blue-900/70  w-full h-[500px] ">
-          <h1 className="text-5xl font-bold text-white pt-10 px-[50px]">Find Your Dream Job Today <br/> Today</h1>
-          <p className="text-white text-2xl ml-[50px] mt-3">Search from thousands of job opportunities <br/> and start your carrer journey now.</p>
+          <h1 className="text-5xl font-bold text-white pt-10 px-[50px]">Find Your Dream Job Today <br /> Today</h1>
+          <p className="text-white text-2xl ml-[50px] mt-3">Search from thousands of job opportunities <br /> and start your carrer journey now.</p>
 
           <div className="inputs bg-white mx-10 py-4  mt-[40px] flex gap-10 rounded-md">
             <input className="ring px-3 p-3 rounded-md w-[500px] ml-2 ml-[150px]" type="text" placeholder="job title , skills ,company..." />
@@ -25,54 +47,54 @@ function Home() {
 
       <div className="categorys">
         <h1 className="text-2xl font-bold px-[50px] py-8">Popular Categories</h1>
-       <div className="category flex justify-center gap-16">
-         <div className="category1 ring shadow-md rounded-xl w-[250px] p-5 ">
-          <div className="box bg-blue-200 h-20 w-20 rounded-full ml-[50px] ">
-            <i className="fa-solid fa-desktop ml-3 mt-4 text-5xl" style={{ color: "rgb(0, 193, 255)" }}></i>
+        <div className="category flex justify-center gap-16">
+          <div className="category1 ring shadow-md rounded-xl w-[250px] p-5 ">
+            <div className="box bg-blue-200 h-20 w-20 rounded-full ml-[50px] ">
+              <i className="fa-solid fa-desktop ml-3 mt-4 text-5xl" style={{ color: "rgb(0, 193, 255)" }}></i>
+            </div>
+            <p className="text-xl text-center">Frontend Developer</p>
+            <p className="text-xl  text-center font-bold" > (120+ jobs)</p>
           </div>
-          <p className="text-xl text-center">Frontend Developer</p>
-          <p className="text-xl  text-center font-bold" > (120+ jobs)</p>
-        </div>
-        <div className="category1 ring shadow-md rounded-xl w-[250px] p-5 ">
-          <div className="box bg-green-200 h-20 w-20 rounded-full ml-[50px] ">
-           <i class="fa-solid fa-database  ml-3 mt-4 text-5xl" style={{color: "rgb(0, 255, 102)"}}></i>
+          <div className="category1 ring shadow-md rounded-xl w-[250px] p-5 ">
+            <div className="box bg-green-200 h-20 w-20 rounded-full ml-[50px] ">
+              <i className="fa-solid fa-database  ml-3 mt-4 text-5xl" style={{ color: "rgb(0, 255, 102)" }}></i>
+            </div>
+            <p className="text-xl text-center">Backend Developer</p>
+            <p className="text-xl text-center font-bold" > (120+ jobs)</p>
           </div>
-          <p className="text-xl text-center">Backend Developer</p>
-          <p className="text-xl text-center font-bold" > (120+ jobs)</p>
-        </div>
 
-        <div className="category1 ring shadow-md rounded-xl w-[250px] p-5 ">
-          <div className="box bg-blue-200 h-20 w-20 rounded-full ml-[50px] ">
-           <i class="fa-solid fa-laptop ml-3 mt-4 text-5xl" style={{color: "rgb(0, 193, 255)"}}></i>
+          <div className="category1 ring shadow-md rounded-xl w-[250px] p-5 ">
+            <div className="box bg-blue-200 h-20 w-20 rounded-full ml-[50px] ">
+              <i className="fa-solid fa-laptop ml-3 mt-4 text-5xl" style={{ color: "rgb(0, 193, 255)" }}></i>
+            </div>
+            <p className="text-xl text-center">Full StackDeveloper</p>
+            <p className="text-xl text-center font-bold" > (120+ jobs)</p>
           </div>
-          <p className="text-xl text-center">Full StackDeveloper</p>
-          <p className="text-xl text-center font-bold" > (120+ jobs)</p>
-        </div>
 
-        <div className="category1 ring shadow-md rounded-xl w-[250px] p-5 ">
-          <div className="box bg-red-200 h-20 w-20 rounded-full ml-[50px] ">
-            <i className="fa-solid fa-heart ml-3 mt-4 text-5xl" style={{ color: "rgb(255, 0, 0)" }}></i>
+          <div className="category1 ring shadow-md rounded-xl w-[250px] p-5 ">
+            <div className="box bg-red-200 h-20 w-20 rounded-full ml-[50px] ">
+              <i className="fa-solid fa-heart ml-3 mt-4 text-5xl" style={{ color: "rgb(255, 0, 0)" }}></i>
+            </div>
+            <p className="text-xl text-center">UI/UX Developer</p>
+            <p className="text-xl text-center font-bold" > (120+ jobs)</p>
           </div>
-          <p className="text-xl text-center">UI/UX Developer</p>
-          <p className="text-xl text-center font-bold" > (120+ jobs)</p>
-        </div>
 
-        <div className="category1 ring shadow-md rounded-xl w-[250px] p-5 ">
-          <div className="box bg-green-200 h-20 w-20 rounded-full ml-[50px] ">
-            <i className="fa-solid fa-chart-simple ml-3 mt-4 text-5xl" style={{ color: "rgb(0, 255, 102)" }}></i>
+          <div className="category1 ring shadow-md rounded-xl w-[250px] p-5 ">
+            <div className="box bg-green-200 h-20 w-20 rounded-full ml-[50px] ">
+              <i className="fa-solid fa-chart-simple ml-3 mt-4 text-5xl" style={{ color: "rgb(0, 255, 102)" }}></i>
+            </div>
+            <p className="text-xl text-center">Data Anayst</p>
+            <p className="text-xl text-center font-bold" > (120+ jobs)</p>
           </div>
-          <p className="text-xl text-center">Data Anayst</p>
-          <p className="text-xl text-center font-bold" > (120+ jobs)</p>
-        </div>
 
-        <div className="category1 ring shadow-md rounded-xl w-[250px] p-5 ">
-          <div className="box bg-blue-200 h-20 w-20 rounded-full ml-[50px] ">
-            <i className="fa-solid fa-mobile ml-3 mt-4 text-5xl" style={{ color: "rgb(0, 193, 255)" }}></i>
+          <div className="category1 ring shadow-md rounded-xl w-[250px] p-5 ">
+            <div className="box bg-blue-200 h-20 w-20 rounded-full ml-[50px] ">
+              <i className="fa-solid fa-mobile ml-3 mt-4 text-5xl" style={{ color: "rgb(0, 193, 255)" }}></i>
+            </div>
+            <p className="text-xl text-center">Mobile Developer</p>
+            <p className="text-xl text-center font-bold" > (120+ jobs)</p>
           </div>
-          <p className="text-xl text-center">Mobile Developer</p>
-          <p className="text-xl text-center font-bold" > (120+ jobs)</p>
         </div>
-       </div>
 
       </div>
 
