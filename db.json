@@ -313,5 +313,250 @@
       "logo": "https://ui-avatars.com/api/?name=DevSpark&background=ffc107&color=000",
       "posted": "2 days ago"
     }
+  ],
+ "companies": [
+    {
+      "id": 1,
+      "company": "ABC Technologies",
+      "industry": "IT Services & Consulting",
+      "logo": "https://ui-avatars.com/api/?name=ABC&background=0D6EFD&color=fff",
+      "about": "ABC Technologies is a leading IT company providing innovative solutions to clients worldwide.",
+      "website": "https://www.abctechnologies.com",
+      "location": "Rajkot, Gujarat",
+      "sharedOn": "10 Oct 2026"
+    },
+    {
+      "id": 2,
+      "company": "TechNova Solutions",
+      "industry": "Software Development",
+      "logo": "https://ui-avatars.com/api/?name=TechNova&background=6610f2&color=fff",
+      "about": "TechNova Solutions specializes in modern software development and innovative digital solutions.",
+      "website": "https://www.technovasolutions.com",
+      "location": "Ahmedabad, Gujarat",
+      "sharedOn": "09 Oct 2026"
+    },
+    {
+      "id": 3,
+      "company": "CodeCraft Pvt Ltd",
+      "industry": "Backend Development",
+      "logo": "https://ui-avatars.com/api/?name=CodeCraft&background=198754&color=fff",
+      "about": "CodeCraft Pvt Ltd develops secure backend systems, APIs and scalable web applications.",
+      "website": "https://www.codecraft.com",
+      "location": "Surat, Gujarat",
+      "sharedOn": "08 Oct 2026"
+    },
+    {
+      "id": 4,
+      "company": "Creative Minds",
+      "industry": "UI/UX Design",
+      "logo": "https://ui-avatars.com/api/?name=Creative&background=d63384&color=fff",
+      "about": "Creative Minds creates attractive user interfaces and engaging digital experiences.",
+      "website": "https://www.creativeminds.com",
+      "location": "Rajkot, Gujarat",
+      "sharedOn": "10 Oct 2026"
+    },
+    {
+      "id": 5,
+      "company": "WebSphere Technologies",
+      "industry": "Web Development",
+      "logo": "https://ui-avatars.com/api/?name=WebSphere&background=fd7e14&color=fff",
+      "about": "WebSphere Technologies builds modern websites and full-stack web applications for businesses.",
+      "website": "https://www.websphere.com",
+      "location": "Ahmedabad, Gujarat",
+      "sharedOn": "07 Oct 2026"
+    },
+    {
+      "id": 6,
+      "company": "Digital Hub",
+      "industry": "Digital Solutions",
+      "logo": "https://ui-avatars.com/api/?name=DigitalHub&background=0dcaf0&color=fff",
+      "about": "Digital Hub provides website development and digital solutions for growing businesses.",
+      "website": "https://www.digitalhub.com",
+      "location": "Vadodara, Gujarat",
+      "sharedOn": "06 Oct 2026"
+    },
+    {
+      "id": 7,
+      "company": "InfoStack Solutions",
+      "industry": "Enterprise Software",
+      "logo": "https://ui-avatars.com/api/?name=InfoStack&background=343a40&color=fff",
+      "about": "InfoStack Solutions develops enterprise software and business applications using modern technologies.",
+      "website": "https://www.infostack.com",
+      "location": "Ahmedabad, Gujarat",
+      "sharedOn": "09 Oct 2026"
+    },
+    {
+      "id": 8,
+      "company": "DataBridge Tech",
+      "industry": "Data Engineering",
+      "logo": "https://ui-avatars.com/api/?name=DataBridge&background=ffc107&color=000",
+      "about": "DataBridge Tech develops backend services and data-driven solutions for businesses.",
+      "website": "https://www.databridgetech.com",
+      "location": "Surat, Gujarat",
+      "sharedOn": "08 Oct 2026"
+    },
+    {
+      "id": 9,
+      "company": "AppZone Technologies",
+      "industry": "Mobile App Development",
+      "logo": "https://ui-avatars.com/api/?name=AppZone&background=20c997&color=fff",
+      "about": "AppZone Technologies develops cross-platform mobile applications and digital products.",
+      "website": "https://www.appzone.com",
+      "location": "Rajkot, Gujarat",
+      "sharedOn": "10 Oct 2026"
+    },
+    {
+      "id": 10,
+      "company": "Insight Analytics",
+      "industry": "Data Analytics",
+      "logo": "https://ui-avatars.com/api/?name=Insight&background=6f42c1&color=fff",
+      "about": "Insight Analytics helps businesses understand data and make informed business decisions.",
+      "website": "https://www.insightanalytics.com",
+      "location": "Ahmedabad, Gujarat",
+      "sharedOn": "05 Oct 2026"
+    },
+    {
+      "id": 11,
+      "company": "WebPixel Studio",
+      "industry": "Web Design & Development",
+      "logo": "https://ui-avatars.com/api/?name=WebPixel&background=dc3545&color=fff",
+      "about": "WebPixel Studio designs and develops responsive websites and customized WordPress solutions.",
+      "website": "https://www.webpixels.com",
+      "location": "Rajkot, Gujarat",
+      "sharedOn": "09 Oct 2026"
+    },
+    {
+      "id": 12,
+      "company": "QualityFirst Systems",
+      "industry": "Software Testing & QA",
+      "logo": "https://ui-avatars.com/api/?name=QualityFirst&background=0d6efd&color=fff",
+      "about": "QualityFirst Systems focuses on software quality assurance, manual testing and reliable applications.",
+      "website": "https://www.qualityfirst.com",
+      "location": "Vadodara, Gujarat",
+      "sharedOn": "07 Oct 2026"
+    },
+    {
+      "id": 13,
+      "company": "NextGen Infotech",
+      "industry": "Information Technology",
+      "logo": "https://ui-avatars.com/api/?name=NextGen&background=fd7e14&color=fff",
+      "about": "NextGen Infotech builds scalable frontend applications and modern business software.",
+      "website": "https://www.nextgeninfotech.com",
+      "location": "Ahmedabad, Gujarat",
+      "sharedOn": "08 Oct 2026"
+    },
+    {
+      "id": 14,
+      "company": "CloudTech Solutions",
+      "industry": "Cloud & Web Development",
+      "logo": "https://ui-avatars.com/api/?name=CloudTech&background=198754&color=fff",
+      "about": "CloudTech Solutions develops full-stack applications and cloud-based digital products.",
+      "website": "https://www.cloudtech.com",
+      "location": "Surat, Gujarat",
+      "sharedOn": "10 Oct 2026"
+    },
+    {
+      "id": 15,
+      "company": "Pixel Art Studio",
+      "industry": "Graphic & UI Design",
+      "logo": "https://ui-avatars.com/api/?name=PixelArt&background=e83e8c&color=fff",
+      "about": "Pixel Art Studio creates visual designs, branding materials and digital experiences.",
+      "website": "https://www.pixelartstudio.com",
+      "location": "Rajkot, Gujarat",
+      "sharedOn": "06 Oct 2026"
+    },
+    {
+      "id": 16,
+      "company": "CloudNine Systems",
+      "industry": "Cloud Computing & DevOps",
+      "logo": "https://ui-avatars.com/api/?name=CloudNine&background=343a40&color=fff",
+      "about": "CloudNine Systems provides cloud infrastructure, deployment automation and DevOps solutions.",
+      "website": "https://www.cloudnine.com",
+      "location": "Ahmedabad, Gujarat",
+      "sharedOn": "09 Oct 2026"
+    },
+    {
+      "id": 17,
+      "company": "CodeLine Technologies",
+      "industry": "Web Application Development",
+      "logo": "https://ui-avatars.com/api/?name=CodeLine&background=6c757d&color=fff",
+      "about": "CodeLine Technologies develops dynamic websites and maintains business web applications.",
+      "website": "https://www.codeline.com",
+      "location": "Vadodara, Gujarat",
+      "sharedOn": "08 Oct 2026"
+    },
+    {
+      "id": 18,
+      "company": "RankBoost Digital",
+      "industry": "Digital Marketing & SEO",
+      "logo": "https://ui-avatars.com/api/?name=RankBoost&background=20c997&color=fff",
+      "about": "RankBoost Digital helps businesses improve online visibility through SEO and digital marketing.",
+      "website": "https://www.rankboost.com",
+      "location": "Rajkot, Gujarat",
+      "sharedOn": "07 Oct 2026"
+    },
+    {
+      "id": 19,
+      "company": "MobileFirst Tech",
+      "industry": "Mobile App Development",
+      "logo": "https://ui-avatars.com/api/?name=MobileFirst&background=0d6efd&color=fff",
+      "about": "MobileFirst Tech develops Android and iOS applications using modern mobile technologies.",
+      "website": "https://www.mobilefirsttech.com",
+      "location": "Ahmedabad, Gujarat",
+      "sharedOn": "09 Oct 2026"
+    },
+    {
+      "id": 20,
+      "company": "SmartBiz Consulting",
+      "industry": "Business & IT Consulting",
+      "logo": "https://ui-avatars.com/api/?name=SmartBiz&background=6610f2&color=fff",
+      "about": "SmartBiz Consulting helps businesses improve processes through technology and business analysis.",
+      "website": "https://www.smartbizconsulting.com",
+      "location": "Surat, Gujarat",
+      "sharedOn": "05 Oct 2026"
+    },
+    {
+      "id": 21,
+      "company": "BrightWeb Technologies",
+      "industry": "Frontend Web Development",
+      "logo": "https://ui-avatars.com/api/?name=BrightWeb&background=0dcaf0&color=fff",
+      "about": "BrightWeb Technologies creates responsive websites and provides practical web development experience.",
+      "website": "https://www.brightweb.com",
+      "location": "Rajkot, Gujarat",
+      "sharedOn": "10 Oct 2026"
+    },
+    {
+      "id": 22,
+      "company": "DataCore Systems",
+      "industry": "Database Management",
+      "logo": "https://ui-avatars.com/api/?name=DataCore&background=343a40&color=fff",
+      "about": "DataCore Systems specializes in database management, data security and performance optimization.",
+      "website": "https://www.datacoresystems.com",
+      "location": "Ahmedabad, Gujarat",
+      "sharedOn": "06 Oct 2026"
+    },
+    {
+      "id": 23,
+      "company": "WordWave Media",
+      "industry": "Content Writing & Media",
+      "logo": "https://ui-avatars.com/api/?name=WordWave&background=d63384&color=fff",
+      "about": "WordWave Media creates website content, blog articles and digital marketing copy for businesses.",
+      "website": "https://www.wordwavemedia.com",
+      "location": "Vadodara, Gujarat",
+      "sharedOn": "08 Oct 2026"
+    },
+    {
+      "id": 24,
+      "company": "DevSpark Technologies",
+      "industry": "Software & Web Development",
+      "logo": "https://ui-avatars.com/api/?name=DevSpark&background=ffc107&color=000",
+      "about": "DevSpark Technologies develops interactive web applications and delivers modern software solutions.",
+      "website": "https://www.devspark.com",
+      "location": "Rajkot, Gujarat",
+      "sharedOn": "09 Oct 2026"
+    }
   ]
+
 }
+
+

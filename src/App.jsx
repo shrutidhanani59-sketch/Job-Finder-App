@@ -26,11 +26,11 @@ function App() {
 
         <Route path="/home" element={<Home />} />
 
-        <Route path="/jobs" element={<Jobscreen />} />
+        <Route path="/jobscreen" element={<Jobscreen />} />
 
-        <Route path="/jobdetails" element={<Jobdetails />} />
+        <Route path="/jobdetails/:id" element={<Jobdetails />} />
 
-        <Route path="/applyjob" element={<Applyjob />} />
+         <Route path="/applyjob" element={<Applyjob />} />
 
         <Route path="/savejob" element={<Savejob />} />
 

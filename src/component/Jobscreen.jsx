@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Jobdetails from "./Jobdetails";
 
 function Jobscreen() {
     const [Alldata, setAlldata] = useState([]);
-    const [currentpages, setCurrentpages] = useState(1);
 
     const API = "http://localhost:3000/jobs";
     useEffect(() => {
@@ -16,16 +17,87 @@ function Jobscreen() {
             })
         })
     }, []);
+
     const [currentpage, setCurrentpage] = useState(1);
     const [pageperdata, setPageperdata] = useState(3);
+    const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("All Category");
+    const [location, setLocation] = useState("All Location");
+    const [salary, setSalary] = useState("All Salary");
+    const [sortBy, setSortBy] = useState("Latest");
+    
+    const navigate = useNavigate();
 
-    let totelpage = Math.ceil(Alldata.length / pageperdata);
 
-    let lastIndex = currentpage * pageperdata;
-    let FirstIndex = lastIndex - pageperdata;
-    let currentpageData = Alldata.slice(FirstIndex, lastIndex);
+    const filteredData = Alldata.filter((element) => {
+        const searchText = search.toLowerCase().trim();
 
-    const [category , setCategory] = useState("")
+        const matchSearch =
+            !searchText ||
+            element.title?.toLowerCase().includes(searchText) ||
+            element.company?.toLowerCase().includes(searchText) ||
+            element.skills?.some((skill) =>
+                skill.toLowerCase().includes(searchText)
+            );
+
+        const matchCategory =
+            category === "All Category" ||
+            element.category?.toLowerCase().includes("frontend") &&
+            category.toLowerCase().includes("frontend") ||
+            element.category?.toLowerCase() === category.toLowerCase() ||
+            element.title?.toLowerCase().includes(category.toLowerCase());
+
+        const matchLocation =
+            location === "All Location" ||
+            element.location?.toLowerCase().trim() ===
+            location.toLowerCase().trim();
+
+        const matchSalary = (() => {
+            if (salary === "All Salary") return true;
+
+            const [min, max] = salary
+                .split(" - ")
+                .map((value) => Number(value.replace(/,/g, "")));
+
+            const salaryNumbers = element.salary?.match(/[\d,]+/g);
+
+            if (!salaryNumbers || salaryNumbers.length < 2) {
+                return false;
+            }
+
+            const jobMin = Number(salaryNumbers[0].replace(/,/g, ""));
+            const jobMax = Number(salaryNumbers[1].replace(/,/g, ""));
+
+            return jobMin === min && jobMax === max;
+        })();
+
+
+
+        return matchSearch && matchCategory && matchLocation && matchSalary;
+
+    });
+
+    const sortedData = [...filteredData].sort((a, b) => {
+        const getDays = (posted) => {
+            const days = posted?.match(/\d+/);
+            return days ? Number(days[0]) : 0;
+        };
+
+        return sortBy === "Latest"
+            ? getDays(a.posted) - getDays(b.posted)
+            : getDays(b.posted) - getDays(a.posted);
+    });
+
+    const totelpage = Math.ceil(sortedData.length / pageperdata);
+
+    const lastIndex = currentpage * pageperdata;
+    const FirstIndex = lastIndex - pageperdata;
+    const currentpageData = sortedData.slice(FirstIndex, lastIndex);
+
+    const handelNextPage = ((id)=>{
+      navigate(`/jobdetails/${id}`); 
+    })
+
 
     return (
         <div className="wrapper">
@@ -53,33 +125,35 @@ function Jobscreen() {
 
             <div className="forms h-[816px] w-[400px] mt-5 fixed  shadow-md p-10">
                 <p className="text-xl">Search</p>
-                <input className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2" type="text" placeholder="Search Job..." />
+                <input onChange={(e) => { setSearch(e.target.value); setCurrentpage(1); }} className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2" type="text" placeholder="Search Job..." />
 
                 <p className="mt-5 text-xl">Category</p>
                 <select className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2"
-               
+                    value={category} onChange={(e) => { setCategory(e.target.value); setCurrentpage(1) }}
                 >
                     <option>All Category</option>
                     <option>UI/UX Designer</option>
-                    <option>Fount-end Developmer</option>
-                    <option>Backend Developmer</option>
-                    <option>Full stack Developmer</option>
+                    <option> Frontend Developer </option>
+                    <option>Backend Developer</option>
+                    <option>Full stack Developer</option>
                     <option>Mobile Developer</option>
                 </select>
 
                 <p className="mt-5 text-xl">Location</p>
-                <select className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2">
+                <select className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2"
+                    onChange={(e) => { setLocation(e.target.value); setCurrentpage(1); }}
+                >
                     <option>All Location</option>
                     <option>Rajkot</option>
-                    <option>Ahemdabad</option>
-                    <option>Jamnagar</option>
-                    <option>Puna</option>
+                    <option>Ahmedabad</option>
                     <option>Surat</option>
                     <option>Vadodara</option>
                 </select>
 
                 <p className="mt-5 text-xl">Salary Range</p>
-                <select className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2">
+                <select className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2"
+                    onChange={(e) => { setSalary(e.target.value); setCurrentpage(1); }}
+                >
                     <option>All Salary</option>
                     <option>10,000 - 20,000</option>
                     <option>20,000 - 30,000</option>
@@ -88,7 +162,9 @@ function Jobscreen() {
                 </select>
 
                 <p className="mt-5 text-xl">Shoty By</p>
-                <select className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2">
+                <select className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2"
+                    onChange={(e) => { setSortBy(e.target.value); setCurrentpage(1); }}
+                >
                     <option>Latest</option>
                     <option>Oldest</option>
 
@@ -163,8 +239,8 @@ function Jobscreen() {
                                         Posted {element.posted}
                                     </p>
 
-                                    <button
-                                        className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+                                    <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+                                     onClick={() => navigate(`/jobdetails/${element.id}`)}
                                     >
                                         View Details →
                                     </button>
@@ -174,21 +250,31 @@ function Jobscreen() {
                     })
                 }
                 <div className="flex ml-[490px] items-center gap-4 mt-6 ">
+
                     <button
-                        onClick={() => setCurrentpage(currentpage - 1)}
-                        disabled={currentpage === 1}
+                        onClick={() => {
+                            if (currentpage > 1) {
+                                setCurrentpage(currentpage - 1);
+                            }
+                        }}
+                        disabled={currentpage <= 1}
                         className="px-5 py-2 rounded-lg bg-blue-600 text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
                     >
                         Previous
                     </button>
 
+
                     <span className="font-semibold text-gray-700">
-                        Page {currentpage} of {Math.max(1, Math.ceil(Alldata.length / pageperdata))}
+                        Page {currentpage} of {Math.max(1, totelpage)}
                     </span>
 
                     <button
-                        onClick={() => setCurrentpage(currentpage + 1)}
-                        disabled={currentpage >= Math.ceil(Alldata.length / pageperdata)}
+                        onClick={() => {
+                            if (currentpage < totelpage) {
+                                setCurrentpage(currentpage + 1);
+                            }
+                        }}
+                        disabled={currentpage >= totelpage}
                         className="px-5 py-2 rounded-lg bg-blue-600 text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
                     >
                         Next
