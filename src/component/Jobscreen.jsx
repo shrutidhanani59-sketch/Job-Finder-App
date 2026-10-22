@@ -5,6 +5,29 @@ import Jobdetails from "./Jobdetails";
 
 function Jobscreen() {
     const [Alldata, setAlldata] = useState([]);
+    const saveJob = (job) => {
+        const savedJobs = JSON.parse(
+            localStorage.getItem("savedJobs") || "[]"
+        );
+
+        const alreadySaved = savedJobs.some(
+            (item) => item.id === job.id
+        );
+
+        if (alreadySaved) {
+            alert("Job already saved!");
+            return;
+        }
+
+        savedJobs.push(job);
+
+        localStorage.setItem(
+            "savedJobs",
+            JSON.stringify(savedJobs)
+        );
+
+        alert("Job saved successfully!");
+    };
 
     const API = "http://localhost:3000/jobs";
     useEffect(() => {
@@ -25,7 +48,7 @@ function Jobscreen() {
     const [location, setLocation] = useState("All Location");
     const [salary, setSalary] = useState("All Salary");
     const [sortBy, setSortBy] = useState("Latest");
-    
+
     const navigate = useNavigate();
 
 
@@ -94,194 +117,435 @@ function Jobscreen() {
     const FirstIndex = lastIndex - pageperdata;
     const currentpageData = sortedData.slice(FirstIndex, lastIndex);
 
-    const handelNextPage = ((id)=>{
-      navigate(`/jobdetails/${id}`); 
+    const handelNextPage = ((id) => {
+        navigate(`/jobdetails/${id}`);
     })
 
 
     return (
-        <div className="wrapper">
-            <nav className="flex justify-between items-center px-[50px] py-5 shadow-md  ">
-                <h1 className="text-3xl font-bold text-blue-900">
-                    Job <span className="text-blue-400">Finder</span>
-                </h1>
 
-                <ul className="flex gap-10 text-xl">
-                    <li><Link to="/home">Home</Link></li>
-                    <li><Link to="/jobs">Jobs</Link></li>
-                    <li><Link to="/savejob">Saved Jobs</Link></li>
-                    <li><Link to="/applications">Applications</Link></li>
+        <div className="min-h-screen bg-[#030817] text-white">
+
+            {/* Navbar */}
+            <nav className="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 bg-[#080f21]/95 px-5 py-4 shadow-xl shadow-blue-950/20 backdrop-blur-xl md:px-10">
+
+                <Link to="/home" className="text-3xl font-extrabold tracking-tight">
+                    Job <span className="text-blue-400">Finder</span>
+                </Link>
+
+                <ul className="flex flex-wrap items-center gap-4 text-sm font-medium text-slate-300 md:gap-7 md:text-base">
+                    <li>
+                        <Link className="transition hover:text-blue-400" to="/home">
+                            Home
+                        </Link>
+                    </li>
+                    <li>
+                        <Link className="text-blue-400 transition hover:text-cyan-300" to="/jobs">
+                            Jobs
+                        </Link>
+                    </li>
+                    <li>
+                        <Link className="transition hover:text-blue-400" to="/savejob">
+                            Saved Jobs
+                        </Link>
+                    </li>
+                    <li>
+                        <Link className="transition hover:text-blue-400" to="/applications">
+                            Applications
+                        </Link>
+                    </li>
                 </ul>
 
-                <div className="flex gap-2">
+                <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
                     <img
-                        className="h-10"
+                        className="h-9 w-9 rounded-full border border-white/10 object-cover"
                         src="https://cdn-icons-png.magnific.com/256/6997/6997662.png?semt=ais_white_label"
                         alt="User"
                     />
-                    <p className="mt-2 text-xl">Shruti</p>
+                    <p className="font-semibold text-slate-200">Shruti</p>
+                    <i className="fa-solid fa-angle-down text-xs text-slate-400"></i>
                 </div>
             </nav>
 
-            <div className="forms h-[816px] w-[400px] mt-5 fixed  shadow-md p-10">
-                <p className="text-xl">Search</p>
-                <input onChange={(e) => { setSearch(e.target.value); setCurrentpage(1); }} className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2" type="text" placeholder="Search Job..." />
 
-                <p className="mt-5 text-xl">Category</p>
-                <select className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2"
-                    value={category} onChange={(e) => { setCategory(e.target.value); setCurrentpage(1) }}
-                >
-                    <option>All Category</option>
-                    <option>UI/UX Designer</option>
-                    <option> Frontend Developer </option>
-                    <option>Backend Developer</option>
-                    <option>Full stack Developer</option>
-                    <option>Mobile Developer</option>
-                </select>
+            {/* Main Content */}
+            <div className="relative mx-auto max-w-[1800px] px-5 py-7 md:px-8">
 
-                <p className="mt-5 text-xl">Location</p>
-                <select className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2"
-                    onChange={(e) => { setLocation(e.target.value); setCurrentpage(1); }}
-                >
-                    <option>All Location</option>
-                    <option>Rajkot</option>
-                    <option>Ahmedabad</option>
-                    <option>Surat</option>
-                    <option>Vadodara</option>
-                </select>
+                {/* Background Glow */}
+                <div className="pointer-events-none absolute left-0 top-20 -z-0 h-72 w-72 rounded-full bg-blue-600/10 blur-[120px]"></div>
+                <div className="pointer-events-none absolute right-0 top-96 -z-0 h-80 w-80 rounded-full bg-violet-600/10 blur-[130px]"></div>
 
-                <p className="mt-5 text-xl">Salary Range</p>
-                <select className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2"
-                    onChange={(e) => { setSalary(e.target.value); setCurrentpage(1); }}
-                >
-                    <option>All Salary</option>
-                    <option>10,000 - 20,000</option>
-                    <option>20,000 - 30,000</option>
-                    <option>30,000 - 40,000</option>
-                    <option>40,000 - 50,000</option>
-                </select>
-
-                <p className="mt-5 text-xl">Shoty By</p>
-                <select className="ring px-2 py-2 w-[300px] rounded-xl hover:outline-none outline-none mt-2"
-                    onChange={(e) => { setSortBy(e.target.value); setCurrentpage(1); }}
-                >
-                    <option>Latest</option>
-                    <option>Oldest</option>
-
-                </select>
-
-            </div>
-
-            <div className="data ml-[420px]  ">
-                {/* <p className="mt-5 text-xl font-bold ">Totel 24 jobs found</p> */}
-
-                {
-                    currentpageData.map((element, index) => {
-                        return (
-                            <div
-                                key={element.id || index}
-                                className="w-full rounded-xl border border-slate-200 bg-white p-4 shadow-sm mt-4"
-                            >
-
-                                <div className="flex items-start justify-between gap-3">
-                                    <div className="flex items-center gap-3">
-                                        <img
-                                            src={element.logo}
-                                            alt={element.company}
-                                            className="h-11 w-11 rounded-full object-cover"
-                                        />
-
-                                        <div>
-                                            <h2 className="text-base font-bold text-slate-800">
-                                                {element.title}
-                                            </h2>
-                                            <p className="text-sm text-slate-500">
-                                                {element.company}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <button className="text-lg text-slate-400 hover:text-red-500">
-                                        ♡
-                                    </button>
-                                </div>
-
-                                {/* Job Information */}
-                                <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-slate-500">
-                                    <span>📍 {element.location}</span>
-                                    <span>💼 {element.type}</span>
-                                    <span>⌛ {element.experience}</span>
-                                    <span className="font-semibold text-emerald-600">
-                                        {element.salary}
-                                    </span>
-                                </div>
-
-                                {/* Skills */}
-                                <div className="mt-3 flex flex-wrap gap-2">
-                                    {element.skills?.map((skill, i) => (
-                                        <span
-                                            key={i}
-                                            className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-600"
-                                        >
-                                            {skill}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                {/* Description */}
-                                <p className="mt-3 line-clamp-1 text-sm text-slate-500">
-                                    {element.description}
-                                </p>
-
-                                {/* Bottom Section */}
-                                <div className="mt-3 flex items-center justify-between border-t border-slate-100 pt-3">
-                                    <p className="text-xs text-slate-400">
-                                        Posted {element.posted}
-                                    </p>
-
-                                    <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-                                     onClick={() => navigate(`/jobdetails/${element.id}`)}
-                                    >
-                                        View Details →
-                                    </button>
-                                </div>
-                            </div>
-                        );
-                    })
-                }
-                <div className="flex ml-[490px] items-center gap-4 mt-6 ">
-
-                    <button
-                        onClick={() => {
-                            if (currentpage > 1) {
-                                setCurrentpage(currentpage - 1);
-                            }
-                        }}
-                        disabled={currentpage <= 1}
-                        className="px-5 py-2 rounded-lg bg-blue-600 text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
-                    >
-                        Previous
-                    </button>
-
-
-                    <span className="font-semibold text-gray-700">
-                        Page {currentpage} of {Math.max(1, totelpage)}
+                {/* Page Heading */}
+                <div className="relative z-10 mb-7">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-500/10 px-3 py-1.5 text-xs font-semibold text-blue-300">
+                        <i className="fa-solid fa-briefcase"></i>
+                        CAREER OPPORTUNITIES
                     </span>
 
-                    <button
-                        onClick={() => {
-                            if (currentpage < totelpage) {
-                                setCurrentpage(currentpage + 1);
-                            }
-                        }}
-                        disabled={currentpage >= totelpage}
-                        className="px-5 py-2 rounded-lg bg-blue-600 text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
-                    >
-                        Next
-                    </button>
+                    <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
+                        Explore <span className="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent">Jobs</span>
+                    </h1>
+
+                    <p className="mt-2 text-sm text-slate-400 sm:text-base">
+                        Find the right opportunity and take the next step in your career.
+                    </p>
+                </div>
+
+
+                {/* Layout */}
+                <div className="relative z-10 grid grid-cols-1 items-start gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
+
+                    {/* Filter Sidebar */}
+                    <aside className="h-fit rounded-2xl border border-white/10 bg-gradient-to-br from-[#111d34] to-[#0b1326] p-5 shadow-2xl shadow-blue-950/30 lg:sticky lg:top-24">
+
+                        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                            <h2 className="text-xl font-bold text-white">
+                                <i className="fa-solid fa-sliders mr-2 text-blue-400"></i>
+                                Filters
+                            </h2>
+
+                            <span className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-semibold text-blue-300">
+                                Find a Job
+                            </span>
+                        </div>
+
+
+                        {/* Search */}
+                        <div className="mt-5">
+                            <label className="mb-2 block text-sm font-semibold text-slate-200">
+                                Search
+                            </label>
+
+                            <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-[#1a263c] px-3 transition focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-500/10">
+                                <i className="fa-solid fa-magnifying-glass text-slate-500"></i>
+
+                                <input
+                                    onChange={(e) => {
+                                        setSearch(e.target.value);
+                                        setCurrentpage(1);
+                                    }}
+                                    value={search}
+                                    className="w-full bg-transparent py-3 text-sm text-white outline-none placeholder:text-slate-500"
+                                    type="text"
+                                    placeholder="Job title, skills, company..."
+                                />
+                            </div>
+                        </div>
+
+
+                        {/* Category */}
+                        <div className="mt-5">
+                            <label className="mb-2 block text-sm font-semibold text-slate-200">
+                                Category
+                            </label>
+
+                            <select
+                                value={category}
+                                onChange={(e) => {
+                                    setCategory(e.target.value);
+                                    setCurrentpage(1);
+                                }}
+                                className="w-full rounded-xl border border-white/10 bg-[#1a263c] px-3 py-3 text-sm text-slate-200 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                            >
+                                <option className="bg-[#111d34]">All Category</option>
+                                <option className="bg-[#111d34]">UI/UX Designer</option>
+                                <option className="bg-[#111d34]">Frontend Developer</option>
+                                <option className="bg-[#111d34]">Backend Developer</option>
+                                <option className="bg-[#111d34]">Full stack Developer</option>
+                                <option className="bg-[#111d34]">Mobile Developer</option>
+                            </select>
+                        </div>
+
+
+                        {/* Location */}
+                        <div className="mt-5">
+                            <label className="mb-2 block text-sm font-semibold text-slate-200">
+                                Location
+                            </label>
+
+                            <select
+                                value={location}
+                                onChange={(e) => {
+                                    setLocation(e.target.value);
+                                    setCurrentpage(1);
+                                }}
+                                className="w-full rounded-xl border border-white/10 bg-[#1a263c] px-3 py-3 text-sm text-slate-200 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                            >
+                                <option className="bg-[#111d34]">All Location</option>
+                                <option className="bg-[#111d34]">Rajkot</option>
+                                <option className="bg-[#111d34]">Ahmedabad</option>
+                                <option className="bg-[#111d34]">Surat</option>
+                                <option className="bg-[#111d34]">Vadodara</option>
+                            </select>
+                        </div>
+
+
+                        {/* Salary */}
+                        <div className="mt-5">
+                            <label className="mb-2 block text-sm font-semibold text-slate-200">
+                                Salary Range
+                            </label>
+
+                            <select
+                                value={salary}
+                                onChange={(e) => {
+                                    setSalary(e.target.value);
+                                    setCurrentpage(1);
+                                }}
+                                className="w-full rounded-xl border border-white/10 bg-[#1a263c] px-3 py-3 text-sm text-slate-200 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                            >
+                                <option className="bg-[#111d34]">All Salary</option>
+                                <option className="bg-[#111d34]">10,000 - 20,000</option>
+                                <option className="bg-[#111d34]">20,000 - 30,000</option>
+                                <option className="bg-[#111d34]">30,000 - 40,000</option>
+                                <option className="bg-[#111d34]">40,000 - 50,000</option>
+                            </select>
+                        </div>
+
+
+                        {/* Sort */}
+                        <div className="mt-5">
+                            <label className="mb-2 block text-sm font-semibold text-slate-200">
+                                Sort By
+                            </label>
+
+                            <select
+                                value={sortBy}
+                                onChange={(e) => {
+                                    setSortBy(e.target.value);
+                                    setCurrentpage(1);
+                                }}
+                                className="w-full rounded-xl border border-white/10 bg-[#1a263c] px-3 py-3 text-sm text-slate-200 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                            >
+                                <option className="bg-[#111d34]">Latest</option>
+                                <option className="bg-[#111d34]">Oldest</option>
+                            </select>
+                        </div>
+
+                        <div className="mt-6 rounded-xl border border-blue-400/10 bg-blue-500/5 p-4">
+                            <p className="text-sm font-semibold text-blue-300">
+                                <i className="fa-solid fa-lightbulb mr-2"></i>
+                                Quick Tip
+                            </p>
+                            <p className="mt-2 text-xs leading-6 text-slate-400">
+                                Use filters to find jobs that match your skills, location and salary expectations.
+                            </p>
+                        </div>
+                    </aside>
+
+
+                    {/* Job Listings */}
+                    <section className="min-w-0">
+
+                        {/* Listing Heading */}
+                        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-[#0b1326]/90 px-5 py-4">
+                            <div>
+                                <h2 className="text-lg font-bold text-white">Available Jobs</h2>
+                                <p className="mt-1 text-sm text-slate-400">
+                                    Browse opportunities that match your profile.
+                                </p>
+                            </div>
+
+                            <span className="rounded-full border border-blue-400/20 bg-blue-500/10 px-4 py-2 text-sm font-semibold text-blue-300">
+                                {currentpageData.length} jobs on this page
+                            </span>
+                        </div>
+
+
+                        {/* Job Cards */}
+                        <div className="space-y-4">
+
+                            {currentpageData.length > 0 ? (
+                                currentpageData.map((element, index) => (
+                                    <div
+                                        key={element.id || index}
+                                        className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#111d34] to-[#0b1326] p-5 shadow-xl shadow-blue-950/20 transition duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:shadow-2xl hover:shadow-blue-950/40 sm:p-6"
+                                    >
+
+                                        {/* Hover Glow */}
+                                        <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-blue-500/0 blur-[90px] transition duration-500 group-hover:bg-blue-500/10"></div>
+
+                                        {/* Header */}
+                                        <div className="relative flex items-start justify-between gap-3">
+
+                                            <div className="flex min-w-0 items-center gap-4">
+
+                                                <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#1a263c]">
+                                                    {element.logo ? (
+                                                        <img
+                                                            src={element.logo}
+                                                            alt={element.company}
+                                                            className="h-full w-full object-cover"
+                                                        />
+                                                    ) : (
+                                                        <span className="text-2xl font-bold text-blue-400">
+                                                            {element.company?.charAt(0) || "J"}
+                                                        </span>
+                                                    )}
+                                                </div>
+
+                                                <div className="min-w-0">
+                                                    <h2 className="break-words text-lg font-bold text-white transition group-hover:text-blue-300 sm:text-xl">
+                                                        {element.title}
+                                                    </h2>
+
+                                                    <p className="mt-1 break-words text-sm text-slate-400">
+                                                        <i className="fa-solid fa-building mr-2 text-blue-400"></i>
+                                                        {element.company}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <button
+                                                type="button"
+                                                onClick={() => saveJob(element)}
+                                                className="rounded-xl border border-white/10 bg-white/5 p-3 text-slate-400 transition hover:border-red-400/40 hover:bg-red-500/10 hover:text-red-400"
+                                                title="Save Job"
+                                            >
+                                                <i className="fa-solid fa-heart"></i>
+                                            </button>
+                                        </div>
+
+
+                                        {/* Job Information */}
+                                        <div className="relative mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-slate-400">
+
+                                            <span className="flex items-center gap-2">
+                                                <i className="fa-solid fa-location-dot text-blue-400"></i>
+                                                {element.location}
+                                            </span>
+
+                                            <span className="flex items-center gap-2">
+                                                <i className="fa-solid fa-briefcase text-violet-400"></i>
+                                                {element.type}
+                                            </span>
+
+                                            <span className="flex items-center gap-2">
+                                                <i className="fa-regular fa-clock text-cyan-400"></i>
+                                                {element.experience}
+                                            </span>
+
+                                            <span className="flex items-center gap-2 font-bold text-emerald-400">
+                                                <i className="fa-solid fa-wallet"></i>
+                                                {element.salary}
+                                            </span>
+                                        </div>
+
+
+                                        {/* Skills */}
+                                        <div className="relative mt-5 flex flex-wrap gap-2">
+                                            {element.skills?.map((skill, i) => (
+                                                <span
+                                                    key={i}
+                                                    className="rounded-full border border-blue-400/20 bg-blue-500/10 px-3 py-1.5 text-xs font-medium text-blue-300 transition hover:border-blue-400/40 hover:bg-blue-500/20"
+                                                >
+                                                    {skill}
+                                                </span>
+                                            ))}
+                                        </div>
+
+
+                                        {/* Description */}
+                                        <p className="relative mt-4 line-clamp-2 text-sm leading-6 text-slate-400">
+                                            {element.description}
+                                        </p>
+
+
+                                        {/* Bottom */}
+                                        <div className="relative mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-4">
+
+                                            <p className="text-xs text-slate-500">
+                                                <i className="fa-regular fa-calendar mr-2"></i>
+                                                Posted {element.posted}
+                                            </p>
+
+                                            <button
+                                                onClick={() => navigate(`/jobdetails/${element.id}`)}
+                                                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-600/10 transition hover:-translate-y-0.5 hover:shadow-blue-500/25"
+                                            >
+                                                View Details
+                                                <i className="fa-solid fa-arrow-right"></i>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#111d34] to-[#0b1326] px-5 py-16 text-center shadow-xl">
+                                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-blue-500/10">
+                                        <i className="fa-solid fa-magnifying-glass text-2xl text-blue-400"></i>
+                                    </div>
+
+                                    <h3 className="mt-5 text-xl font-bold text-white">
+                                        No Jobs Found
+                                    </h3>
+
+                                    <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-400">
+                                        No jobs match your current filters. Try another keyword or change your search criteria.
+                                    </p>
+                                </div>
+                            )}
+
+                        </div>
+
+
+                        {/* Pagination */}
+                        <div className="mt-6 flex flex-wrap items-center justify-center gap-4 rounded-2xl border border-white/10 bg-[#0b1326]/90 p-4">
+
+                            <button
+                                onClick={() => {
+                                    if (currentpage > 1) {
+                                        setCurrentpage(currentpage - 1);
+                                    }
+                                }}
+                                disabled={currentpage <= 1}
+                                className="rounded-xl border border-white/10 bg-[#1a263c] px-5 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-blue-400/30 hover:bg-blue-500/10 disabled:cursor-not-allowed disabled:opacity-30"
+                            >
+                                <i className="fa-solid fa-arrow-left mr-2"></i>
+                                Previous
+                            </button>
+
+                            <span className="rounded-lg bg-blue-500/10 px-4 py-2 text-sm font-semibold text-blue-300">
+                                Page {currentpage} of {Math.max(1, totelpage)}
+                            </span>
+
+                            <button
+                                onClick={() => {
+                                    if (currentpage < totelpage) {
+                                        setCurrentpage(currentpage + 1);
+                                    }
+                                }}
+                                disabled={currentpage >= totelpage}
+                                className="rounded-xl border border-white/10 bg-[#1a263c] px-5 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-blue-400/30 hover:bg-blue-500/10 disabled:cursor-not-allowed disabled:opacity-30"
+                            >
+                                Next
+                                <i className="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
+
+                        </div>
+
+                    </section>
                 </div>
             </div>
+
+
+            {/* Footer */}
+            <footer className="border-t border-white/10 bg-[#080f1e] px-5 py-7 text-center">
+                <h2 className="text-xl font-extrabold">
+                    Job <span className="text-blue-400">Finder</span>
+                </h2>
+
+                <p className="mt-2 text-sm text-slate-500">
+                    Find opportunities. Build your future.
+                </p>
+
+                <p className="mt-3 text-xs text-slate-600">
+                    © {new Date().getFullYear()} JobFinder. All rights reserved.
+                </p>
+            </footer>
+
         </div>
+
 
 
     )
