@@ -1,17 +1,111 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 💼 Job Finder
 
-Currently, two official plugins are available:
+Job Finder is a React-based web application that helps users explore job opportunities, search and filter jobs, save their favorite jobs, and view job details.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+- 🔐 User Login and Registration
+- 🏠 Home Page
+- 💼 Browse Available Jobs
+- 🔎 Search Jobs by Title, Company, and Skills
+- 📂 Filter Jobs by Category
+- 📍 Filter Jobs by Location
+- 💰 Filter Jobs by Salary Range
+- ↕️ Sort Jobs by Latest and Oldest
+- ❤️ Save Favorite Jobs
+- 📄 View Job Details
+- 📝 Apply for Jobs
+- 📋 View Applications
+- 📑 Pagination
+- 🎨 Modern Dark UI with Tailwind CSS
+- 📱 Responsive Layout
+- 💾 LocalStorage for Saved Jobs
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Technologies Used
 
-## Expanding the ESLint configuration
+- React.js
+- JavaScript
+- Tailwind CSS
+- React Router DOM
+- Font Awesome
+- JSON Server
+- LocalStorage
+- HTML5
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-"# Job-Finder-App" 
+## 📁 Project Structure
+
+
+JobFinder/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── component/
+│   │   ├── Applications.jsx
+│   │   ├── Applyjob.jsx
+│   │   ├── Dashboard.jsx
+│   │   ├── Home.jsx
+│   │   ├── Jobdetails.jsx
+│   │   ├── Jobscreen.jsx
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   └── Savejob.jsx
+│   ├── App.jsx
+│   └── main.jsx
+├── db.json
+├── package.json
+└── README.md
+
+
+
+## 🔎 Job Search and Filters
+
+Users can find jobs using the following filters:
+
+- Job title, company name, or skills
+- Job category
+- Job location
+- Salary range
+- Latest or oldest job listings
+
+## ❤️ Save Jobs
+
+Users can save their favorite jobs by clicking the heart button.
+
+Saved jobs are stored in the browser's LocalStorage.
+
+## 📄 Job Details and Applications
+
+Users can open a job's details page, view information about the selected job, and navigate to the job application form.
+
+## 📑 Pagination
+
+The jobs page displays three job cards per page. Users can navigate between pages using the Previous and Next buttons.
+
+## 🎨 UI Design
+
+- Dark navy background
+- Blue and violet gradient buttons
+- Modern job cards
+- Responsive Tailwind CSS styling
+- Compact layout designed to avoid page scrolling on desktop
+
+## 👩‍💻 Developer
+
+**Shruti Dhanani**
+
+- Location: Rajkot, Gujarat, India
+- Education: Computer Science
+- Skills: HTML, CSS, JavaScript, React.js, Tailwind CSS
+
+## 📌 Future Improvements
+
+- User authentication with a backend
+- Apply for jobs and store application details
+- View saved jobs and submitted applications
+- Job recommendations
+- Admin dashboard for managing jobs
+
+---
+
+⭐ Thank you for visiting Job Finder!
