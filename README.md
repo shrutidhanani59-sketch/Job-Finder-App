@@ -37,8 +37,11 @@ Job Finder is a React-based web application that helps users explore job opportu
 
 
 JobFinder
+
     public
+
         src
+        
            assets
 
             component
@@ -56,7 +59,7 @@ JobFinder
                Login.jsx
 
                Register.jsx
-               
+
                Savejob.jsx
     App.jsx
     main.jsx
