@@ -36,28 +36,22 @@ Job Finder is a React-based web application that helps users explore job opportu
 ## 📁 Project Structure
 
 
-JobFinder/
-├── public/
-├── src/
-│   ├── assets/
-│   ├── component/
-│   │   ├── Applications.jsx
-│   │   ├── Applyjob.jsx
-│   │   ├── Dashboard.jsx
-│   │   ├── Home.jsx
-│   │   ├── Jobdetails.jsx
-│   │   ├── Jobscreen.jsx
-│   │   ├── Login.jsx
-│   │   ├── Register.jsx
-│   │   └── Savejob.jsx
-│   ├── App.jsx
-│   └── main.jsx
-├── db.json
-├── package.json
-└── README.md
-
-
-
+JobFinder
+    public
+        src
+           assets
+            component
+               Applications.jsx
+               Applyjob.jsx
+               Home.jsx
+               Jobdetails.jsx
+               Jobscreen.jsx
+               Login.jsx
+               Register.jsx
+               Savejob.jsx
+    App.jsx
+    main.jsx
+ 
 ## 🔎 Job Search and Filters
 
 Users can find jobs using the following filters:
