@@ -1,6 +1,5 @@
 import Applications from "./component/Applications";
 import Applyjob from "./component/Applyjob";
-import Dashboard from "./component/Dashboard";
 import Home from "./component/Home";
 import Jobdetails from "./component/Jobdetails";
 import Jobscreen from "./component/Jobscreen";
@@ -36,7 +35,6 @@ function App() {
 
         <Route path="/applications" element={<Applications />} />
 
-        <Route path="/dashboard" element={<Dashboard />} />
 
       </Routes>
     </>
