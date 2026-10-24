@@ -29,17 +29,26 @@ function Jobscreen() {
         alert("Job saved successfully!");
     };
 
-    const API = "http://localhost:3000/jobs";
-    useEffect(() => {
-        fetch(API, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" }
-        }).then((response) => {
-            response.json().then((data) => {
-                setAlldata(data);
-            })
+  useEffect(() => {
+    fetch("/db.json", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Data fetch failed");
+            }
+            return response.json();
         })
-    }, []);
+        .then((data) => {
+            setAlldata(data.jobs || []);
+        })
+        .catch((error) => {
+            console.log("Error fetching jobs:", error);
+        });
+}, []);
 
     const [currentpage, setCurrentpage] = useState(1);
     const [pageperdata, setPageperdata] = useState(3);

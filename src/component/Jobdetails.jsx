@@ -11,29 +11,33 @@ function Jobdetails() {
     const [companies, setCompanies] = useState([]);
     const navigate = useNavigate();
     const { id } = useParams();
-    const API = "http://localhost:3000/companies";
+    // const API = "http://localhost:3000/companies";
 
-    useEffect(() => {
-        fetch(API, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" }
-        }).then((res) => {
-            res.json().then((data2) => {
-                setCompanies(data2);
-            })
+   useEffect(() => {
+    fetch("/db.json")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch db.json");
+            }
+            return response.json();
         })
-    }, [])
+        .then((data) => {
+            // Company data
+            setCompanies(data.companies || []);
 
-    useEffect(() => {
-        fetch(`http://localhost:3000/jobs/${id}`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" }
-        }).then((response) => {
-            response.json().then((data) => {
-                setAlldata(data);
-            })
+            // Selected job data
+            const selectedJob = data.jobs?.find(
+                (job) => String(job.id) === String(id)
+            );
+
+            setAlldata(selectedJob || null);
         })
-    }, [id]);
+        .catch((error) => {
+            console.log("Fetch Error:", error);
+            setAlldata(null);
+            setCompanies([]);
+        });
+}, [id]);
 
     const companyInfo = companies.find(
         (company) => company.company === Alldata?.company
@@ -51,7 +55,7 @@ function Jobdetails() {
 
         <div className="min-h-screen bg-[#030817] text-white">
 
-      {/* Navbar */}
+    
       <nav className="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 bg-[#080f21]/90 px-5 py-4 shadow-lg shadow-blue-950/20 backdrop-blur-xl md:px-10">
 
         <Link

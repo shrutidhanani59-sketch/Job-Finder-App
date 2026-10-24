@@ -9,24 +9,48 @@ function Applyjob() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
+useEffect(() => {
     if (!id) return;
 
-    fetch(`http://localhost:3000/jobs/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Job not found");
-        return res.json();
-      })
-      .then((job) => setData(job))
-      .catch((error) => console.log(error));
-  }, [id]);
+    fetch("/db.json")
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error("Job data not found");
+            }
+            return res.json();
+        })
+        .then((result) => {
+            const job = result.jobs?.find(
+                (item) => String(item.id) === String(id)
+            );
 
-  useEffect(() => {
-    fetch("http://localhost:3000/companies")
-      .then((res) => res.json())
-      .then((result) => setCompanies(result))
-      .catch((error) => console.log(error));
-  }, []);
+            if (!job) {
+                throw new Error("Job not found");
+            }
+
+            setData(job);
+        })
+        .catch((error) => {
+            console.log("Job Error:", error);
+        });
+}, [id]);
+
+
+useEffect(() => {
+    fetch("/db.json")
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error("Company data not found");
+            }
+            return res.json();
+        })
+        .then((result) => {
+            setCompanies(result.companies || []);
+        })
+        .catch((error) => {
+            console.log("Company Error:", error);
+        });
+}, []);
 
   const companyInfo = companies.find(
     (company) => company.company === data?.company

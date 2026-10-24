@@ -39,10 +39,6 @@ const handelragister = () => {
   navigate("/Register");
 };
 
-    // const handelragister = () => {
-    //   navigate("/Register");
-    // }
-  
     return (
 
 
