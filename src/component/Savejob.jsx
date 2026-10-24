@@ -3,6 +3,21 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Savejob() {
+
+  const [userName, setUserName] = useState("");
+
+useEffect(() => {
+    const users = JSON.parse(localStorage.getItem("data")) || [];
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
+
+    if (loggedInUser?.name) {
+        setUserName(loggedInUser.name);
+    } else if (Array.isArray(users) && users.length > 0) {
+        setUserName(users[users.length - 1].name);
+    } else if (users?.name) {
+        setUserName(users.name);
+    }
+}, []);
   const [savedJobs, setSavedJobs] = useState([]);
   const navigate = useNavigate();
 
@@ -30,26 +45,58 @@ function Savejob() {
   return (
     <div className="min-h-screen bg-[#030817] text-white">
       {/* Navbar */}
-      <nav className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 bg-[#080f21] px-5 py-5 md:px-10">
-        <Link to="/home" className="text-3xl font-extrabold">
-          Job <span className="text-blue-400">Finder</span>
-        </Link>
+     <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#080f21]/90 px-5 py-5 shadow-lg shadow-blue-950/20 backdrop-blur-xl md:px-10">
 
-        <div className="flex flex-wrap gap-5 text-sm text-slate-300">
-          <Link to="/home" className="hover:text-blue-400">
+    <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-5">
+
+      <Link to="/home" className="text-3xl font-extrabold tracking-tight">
+        Job<span className="text-blue-400">Finder</span>
+      </Link>
+
+      <ul className="flex flex-wrap items-center gap-5 text-sm font-medium text-slate-300 md:gap-8 md:text-base">
+        <li>
+          <Link to="/home" className="text-blue-400 transition hover:text-blue-300">
             Home
           </Link>
-          <Link to="/jobs" className="hover:text-blue-400">
+        </li>
+        <li>
+          <Link to="/jobs" className="transition hover:text-blue-400">
             Jobs
           </Link>
-          <Link to="/savejob" className="text-blue-400">
+        </li>
+        <li>
+          <Link to="/savejob" className="transition hover:text-blue-400">
             Saved Jobs
           </Link>
-          <Link to="/applications" className="hover:text-blue-400">
+        </li>
+        <li>
+          <Link to="/applications" className="transition hover:text-blue-400">
             Applications
           </Link>
+        </li>
+      </ul>
+
+      <div className="flex items-center gap-4">
+        <Link
+          to="/jobs"
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition hover:border-blue-400/50 hover:bg-blue-500/10 hover:text-blue-400"
+        >
+          <i className="fa-solid fa-magnifying-glass"></i>
+        </Link>
+
+        <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+         <div className="flex h-9 w-9 items-center justify-center rounded-full border border-blue-400/30 bg-blue-500/15 text-blue-400">
+    <i className="fa-solid fa-user text-lg"></i>
+</div>
+         <span className="font-medium">
+    {userName || "User"}
+</span>
+          <i className="fa-solid fa-angle-down text-xs text-slate-400"></i>
         </div>
-      </nav>
+      </div>
+
+    </div>
+  </nav>
 
       {/* Content */}
       <main className="mx-auto max-w-6xl px-5 py-10 md:px-8">

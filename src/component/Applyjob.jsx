@@ -3,11 +3,28 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 function Applyjob() {
+
+  const [userName, setUserName] = useState("");
+  
+useEffect(() => {
+    const users = JSON.parse(localStorage.getItem("data")) || [];
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
+
+    if (loggedInUser?.name) {
+        setUserName(loggedInUser.name);
+    } else if (Array.isArray(users) && users.length > 0) {
+        setUserName(users[users.length - 1].name);
+    } else if (users?.name) {
+        setUserName(users.name);
+    }
+}, []);
+
   const [data, setData] = useState(null);
   const [companies, setCompanies] = useState([]);
 
   const { id } = useParams();
   const navigate = useNavigate();
+  
 
 useEffect(() => {
     if (!id) return;
@@ -131,12 +148,12 @@ useEffect(() => {
         </ul>
 
         <div className="flex items-center gap-3">
-          <img
-            className="h-9 w-9 rounded-full object-cover"
-            src="https://cdn-icons-png.magnific.com/256/6997/6997662.png?semt=ais_white_label"
-            alt="User"
-          />
-          <span className="font-semibold">Shruti</span>
+         <div className="flex h-9 w-9 items-center justify-center rounded-full border border-blue-400/30 bg-blue-500/15 text-blue-400">
+    <i className="fa-solid fa-user text-lg"></i>
+</div>
+         <span className="font-medium">
+    {userName || "User"}
+</span>
         </div>
       </nav>
 
